@@ -8,50 +8,65 @@
 <h:head>
     <title>Valuta Converter</title>
     <h:outputStylesheet library="css" name="stylesheet.css"/>
-    <link rel="stylesheet" type="text/css" href="    https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
 </h:head>
 <h:body>
-    <h:dataTable value="#{valutaConverter.valutaList.valutas}" var="valuta" class="table table-striped">
-        <h:column>
-            <f:facet name="header">Name</f:facet>
-            #{valuta.name}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Value</f:facet>
-            #{valuta.value}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Symbol</f:facet>
-            #{valuta.symbol}
-        </h:column>
-    </h:dataTable>
+    <div class="container">
 
-    <h:form>
-        <h1>Convert your amount of euros to the value of your choice.</h1>
-        <h:inputText id="amount"
-                     value="#{valutaConverter.value}"
-                     required="true"
-                     requiredMessage="Error: Amount is required."
-                     maxlength="25" />
-        <p></p>
-        <h:selectOneMenu value="#{valutaConverter.valuta}">
-            <c:forEach items="${valutaConverter.valutaList.valutas}" var="valuta">
-                <f:selectItem itemValue="${valuta.name}" itemLabel="${valuta.name}"></f:selectItem>
-            </c:forEach>
-            <!--<f:selectItem itemValue="yen" itemLabel="Yen"></f:selectItem>-->
-        </h:selectOneMenu>
-        <p></p>
-        <h:commandButton id="submit" value="Submit" action="response" />
-        <h:commandButton id="reset" value="Reset" type="reset" />
-    </h:form>
-    <div class="messagecolor">
-        <h:messages showSummary="true"
-                    showDetail="false"
-                    errorStyle="color: #d20005"
-                    infoStyle="color: blue"/>
+        <div class="col-sm-12">
+            <h:form>
+                <h:dataTable value="#{valutaConverter.valutaList.valutas}" var="valuta" class="table table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            Name
+                            <h:commandLink action="#{valutaConverter.sortValutasByName()}">
+                                <span class="fa fa-sort"></span>
+                            </h:commandLink>
+                        </f:facet>
+                        #{valuta.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Value
+                            <h:commandLink action="#{valutaConverter.sortValutasByValue()}">
+                                <span class="fa fa-sort"></span>
+                            </h:commandLink></f:facet>
+                        #{valuta.value}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Symbol</f:facet>
+                        #{valuta.symbol}
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+
+
+
+
+        <!--<h1>Convert your amount of euros to the value of your choice.</h1>-->
+            <!--<h:inputText id="amount"-->
+                         <!--value="#{valutaConverter.value}"-->
+                         <!--required="true"-->
+                         <!--requiredMessage="Error: Amount is required."-->
+                         <!--maxlength="25" />-->
+            <!--<p></p>-->
+            <!--<h:selectOneMenu value="#{valutaConverter.valuta}">-->
+                <!--<c:forEach items="${valutaConverter.valutaList.valutas}" var="valuta">-->
+                    <!--<f:selectItem itemValue="${valuta.name}" itemLabel="${valuta.name}"></f:selectItem>-->
+                <!--</c:forEach>-->
+                <!--&lt;!&ndash;<f:selectItem itemValue="yen" itemLabel="Yen"></f:selectItem>&ndash;&gt;-->
+            <!--</h:selectOneMenu>-->
+            <!--<p></p>-->
+            <!--<h:commandButton id="submit" value="Submit" action="response" />-->
+            <!--<h:commandButton id="reset" value="Reset" type="reset" />-->
+        <!--<div class="messagecolor">-->
+            <!--<h:messages showSummary="true"-->
+                        <!--showDetail="false"-->
+                        <!--errorStyle="color: #d20005"-->
+                        <!--infoStyle="color: blue"/>-->
+        <!--</div>-->
     </div>
-
-
 </h:body>
 </html>
 
